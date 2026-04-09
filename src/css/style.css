@@ -202,8 +202,23 @@ body {
   transition: background 0.15s ease;
 }
 
-.generate-btn:hover  { background: var(--primary-hover); }
-.generate-btn:active { opacity: 0.85; }
+.generate-btn:hover    { background: var(--primary-hover); }
+.generate-btn:active   { opacity: 0.85; }
+.generate-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.result-loading,
+.result-error {
+  list-style: none;
+  padding: 28px 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-loading { color: var(--text-muted); }
+.result-error   { color: var(--accent); }
 
 /* ── Output column ────────────────────────────────── */
 
