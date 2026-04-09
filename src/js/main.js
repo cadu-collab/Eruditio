@@ -30,7 +30,7 @@ const i18n = {
     copied:           'Copied',
   },
   es: {
-    tagline:          'El arte del halago envenenado.',
+    tagline:          'El arte del halago.',
     heroH1:           'La inteligencia,<br>como arma.',
     heroSub:          'Elige el contexto. Recibe tu cumplido.',
     labelRecipient:   'Destinatario',
