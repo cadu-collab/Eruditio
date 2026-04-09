@@ -35,61 +35,83 @@ body {
 .header {
   background: var(--bg);
   padding: 20px 0;
+  border-top: 3px solid var(--primary);
   border-bottom: 1px solid var(--border);
 }
 
 .header .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--text);
 }
 
 .header .tagline {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /* ── Hero ─────────────────────────────────────────── */
 
 .hero {
-  padding: 64px 0 48px;
+  padding: 80px 0 72px;
   text-align: center;
+}
+
+.hero-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
 }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 42px;
+  font-size: 72px;
   font-weight: 600;
+  font-style: italic;
   color: var(--text);
-  margin-bottom: 12px;
+  line-height: 1.05;
+  margin-bottom: 24px;
 }
 
 .hero-sub {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-muted);
   font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ── Section divider ──────────────────────────────── */
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
 }
 
 /* ── Generator ────────────────────────────────────── */
 
 .generator {
-  padding: 0 0 80px;
+  padding: 64px 0 80px;
 }
 
 .controls {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 32px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .control-group label {
@@ -157,20 +179,20 @@ body {
 
 .generate-btn {
   display: block;
-  width: 100%;
-  padding: 16px;
+  width: fit-content;
+  margin: 0 auto 32px;
+  padding: 16px 52px;
   background: var(--primary);
   color: var(--surface);
   border: none;
-  border-radius: 6px;
+  border-radius: 2px;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.15s ease;
-  margin-bottom: 24px;
 }
 
 .generate-btn:hover  { background: var(--primary-hover); }
@@ -181,8 +203,19 @@ body {
 .output-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 32px;
+  border-radius: 2px;
+  padding: 40px 40px 32px;
+}
+
+.output-card::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 100px;
+  line-height: 0.75;
+  color: var(--border);
+  display: block;
+  margin-bottom: 12px;
+  pointer-events: none;
 }
 
 .output-label {
@@ -194,12 +227,22 @@ body {
   margin-bottom: 16px;
 }
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 #insult-text {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 22px;
+  font-style: italic;
   line-height: 1.65;
   color: var(--text);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+}
+
+#insult-text.animate {
+  animation: fadeUp 0.4s ease;
 }
 
 .output-actions {
@@ -256,6 +299,8 @@ body {
     gap: 20px;
   }
 
-  .hero h1 { font-size: 30px; }
-  #insult-text { font-size: 17px; }
+  .hero h1 { font-size: 44px; }
+  .generate-btn { width: 100%; padding: 16px; }
+  #insult-text { font-size: 18px; }
+  .output-card { padding: 28px 24px 24px; }
 }

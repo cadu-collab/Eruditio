@@ -342,7 +342,10 @@ function pickInsult() {
 
 function showInsult() {
   const insult = pickInsult();
-  insultText.textContent = `"${insult.text}"`;
+  insultText.textContent = insult.text;
+  insultText.classList.remove('animate');
+  void insultText.offsetWidth; // force reflow to restart animation
+  insultText.classList.add('animate');
   output.hidden = false;
   output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -353,8 +356,7 @@ generateBtn.addEventListener('click', showInsult);
 anotherBtn.addEventListener('click', showInsult);
 
 copyBtn.addEventListener('click', () => {
-  const text = insultText.textContent.replace(/^"|"$/g, '');
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(insultText.textContent).then(() => {
     const original = copyBtn.textContent;
     copyBtn.textContent = 'Copied';
     setTimeout(() => { copyBtn.textContent = original; }, 1500);
