@@ -75,7 +75,8 @@ Respond with this exact JSON structure:
     }
 
     const data = await response.json();
-    const parsed = JSON.parse(data.content[0].text);
+    const raw = data.content[0].text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '').trim();
+    const parsed = JSON.parse(raw);
     res.status(200).json(parsed);
 
   } catch (err) {
