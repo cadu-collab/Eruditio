@@ -45,6 +45,7 @@ body {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .logo {
@@ -64,6 +65,36 @@ body {
   text-transform: uppercase;
   color: var(--text-muted);
 }
+
+/* ── Lang toggle ──────────────────────────────────── */
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-sep {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  color: var(--border);
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.lang-btn:hover  { color: var(--text); }
+.lang-btn.active { color: var(--accent); font-weight: 600; }
 
 /* ── Hero ─────────────────────────────────────────── */
 
@@ -353,6 +384,8 @@ body {
     flex-direction: column;
     gap: 8px;
   }
+
+  .lang-toggle { align-self: flex-start; }
 
   .generator { padding: 28px 0 40px; }
 

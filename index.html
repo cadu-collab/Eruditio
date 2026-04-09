@@ -15,15 +15,20 @@
     <div class="container">
       <div class="header-inner">
         <div class="logo">Eruditio</div>
-        <p class="tagline">The art of the eloquent slight.</p>
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <span class="lang-sep">/</span>
+          <button class="lang-btn" data-lang="es">ES</button>
+        </div>
+        <p class="tagline" id="tagline">The art of the eloquent slight.</p>
       </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>Intelligence,<br>weaponized.</h1>
-      <p class="hero-sub">Select your context. Receive your compliment.</p>
+      <h1 id="hero-h1">Intelligence,<br>weaponized.</h1>
+      <p class="hero-sub" id="hero-sub">Select your context. Receive your compliment.</p>
     </div>
   </section>
 
@@ -35,32 +40,32 @@
           <div class="generator-controls">
             <div class="controls">
               <div class="control-group">
-                <label for="relationship">Recipient</label>
+                <label for="relationship" id="label-relationship">Recipient</label>
                 <select id="relationship">
-                  <option value="general">Anyone</option>
-                  <option value="coworker">Coworker</option>
-                  <option value="boss">Boss</option>
-                  <option value="friend">Friend</option>
-                  <option value="ex">Ex</option>
+                  <option value="general" id="opt-r-general">Anyone</option>
+                  <option value="coworker" id="opt-r-coworker">Coworker</option>
+                  <option value="boss" id="opt-r-boss">Boss</option>
+                  <option value="friend" id="opt-r-friend">Friend</option>
+                  <option value="ex" id="opt-r-ex">Ex</option>
                 </select>
               </div>
 
               <div class="control-group">
-                <label for="occasion">Occasion</label>
+                <label for="occasion" id="label-occasion">Occasion</label>
                 <select id="occasion">
-                  <option value="general">Any</option>
-                  <option value="in-person">In Person</option>
-                  <option value="email">Email</option>
-                  <option value="text">Text Message</option>
+                  <option value="general" id="opt-o-general">Any</option>
+                  <option value="in-person" id="opt-o-inperson">In Person</option>
+                  <option value="email" id="opt-o-email">Email</option>
+                  <option value="text" id="opt-o-text">Text Message</option>
                 </select>
               </div>
 
               <div class="control-group">
-                <label>Tone</label>
+                <label id="label-tone">Tone</label>
                 <div class="tone-options">
-                  <button class="tone-btn active" data-tone="1">Subtle</button>
-                  <button class="tone-btn" data-tone="2">Sharp</button>
-                  <button class="tone-btn" data-tone="3">Savage</button>
+                  <button class="tone-btn active" data-tone="1" id="tone-btn-1">Subtle</button>
+                  <button class="tone-btn" data-tone="2" id="tone-btn-2">Sharp</button>
+                  <button class="tone-btn" data-tone="3" id="tone-btn-3">Savage</button>
                 </div>
               </div>
             </div>
@@ -70,13 +75,13 @@
 
           <div class="generator-output">
             <div class="output-header">
-              <span class="output-section-label">Your Compliments</span>
+              <span class="output-section-label" id="output-section-label">Your Compliments</span>
             </div>
             <div class="output" id="output" hidden>
               <ol class="results-list" id="results-list"></ol>
             </div>
             <div class="output-placeholder" id="output-placeholder">
-              <p>Select a recipient, occasion, and tone &mdash; then generate.</p>
+              <p id="output-placeholder-text">Select a recipient, occasion, and tone &mdash; then generate.</p>
             </div>
           </div>
 
@@ -87,7 +92,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>Eruditio &mdash; Because bluntness is for amateurs.</p>
+      <p id="footer-text">Eruditio &mdash; Because bluntness is for amateurs.</p>
     </div>
   </footer>
 

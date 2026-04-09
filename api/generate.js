@@ -3,7 +3,8 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { relationship, occasion, tone } = req.body;
+  const { relationship, occasion, tone, language } = req.body;
+  const isSpanish = language === 'es';
 
   const toneLabel = { 1: 'subtle', 2: 'sharp', 3: 'savage' }[tone] ?? 'subtle';
 
@@ -50,7 +51,7 @@ Respond with this exact JSON structure:
     { "text": "..." },
     { "text": "..." }
   ]
-}`;
+}${isSpanish ? '\n\nRespond entirely in Spanish. The compliments must sound natural in Spanish, not translated.' : ''}`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
