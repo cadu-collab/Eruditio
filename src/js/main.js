@@ -289,15 +289,13 @@ const insults = [
 // ── State ──────────────────────────────────────────────────────────────────
 
 let selectedTone = 1;
-let lastPickedIndex = -1;
+let lastPickedIndices = new Set();
 
 // ── Elements ───────────────────────────────────────────────────────────────
 
 const generateBtn = document.getElementById('generate-btn');
-const copyBtn     = document.getElementById('copy-btn');
-const anotherBtn  = document.getElementById('another-btn');
 const output      = document.getElementById('output');
-const insultText  = document.getElementById('insult-text');
+const resultsList = document.getElementById('results-list');
 const toneBtns    = document.querySelectorAll('.tone-btn');
 
 // ── Tone selection ─────────────────────────────────────────────────────────
@@ -310,9 +308,9 @@ toneBtns.forEach(btn => {
   });
 });
 
-// ── Pick an insult ─────────────────────────────────────────────────────────
+// ── Pick insults ────────────────────────────────────────────────────────────
 
-function pickInsult() {
+function pickInsults(count = 5) {
   const relationship = document.getElementById('relationship').value;
   const occasion     = document.getElementById('occasion').value;
 
@@ -324,41 +322,66 @@ function pickInsult() {
   });
 
   // Fallback: match tone only if nothing fits the full context
-  if (pool.length === 0) {
-    pool = insults.filter(i => i.tone === selectedTone);
+  if (pool.length === 0) pool = insults.filter(i => i.tone === selectedTone);
+
+  // Exclude previously shown insults if pool is large enough
+  let available = pool.filter(i => !lastPickedIndices.has(insults.indexOf(i)));
+  if (available.length < count) { lastPickedIndices.clear(); available = pool; }
+
+  // Fisher-Yates shuffle
+  const shuffled = [...available];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
 
-  // Avoid repeating the last pick when the pool allows it
-  const available = pool.length > 1
-    ? pool.filter(i => insults.indexOf(i) !== lastPickedIndex)
-    : pool;
-
-  const pick = available[Math.floor(Math.random() * available.length)];
-  lastPickedIndex = insults.indexOf(pick);
-  return pick;
+  const picks = shuffled.slice(0, count);
+  lastPickedIndices = new Set(picks.map(p => insults.indexOf(p)));
+  return picks;
 }
 
 // ── Render ─────────────────────────────────────────────────────────────────
 
-function showInsult() {
-  const insult = pickInsult();
-  insultText.textContent = insult.text;
-  insultText.classList.remove('animate');
-  void insultText.offsetWidth; // force reflow to restart animation
-  insultText.classList.add('animate');
+function showInsults() {
+  const picks = pickInsults(5);
+  resultsList.innerHTML = '';
+
+  picks.forEach((insult, i) => {
+    const li = document.createElement('li');
+    li.className = 'result-item animate';
+    li.style.animationDelay = `${i * 60}ms`;
+
+    const num = document.createElement('span');
+    num.className = 'result-num';
+    num.setAttribute('aria-hidden', 'true');
+    num.textContent = String(i + 1).padStart(2, '0');
+
+    const text = document.createElement('p');
+    text.className = 'result-text';
+    text.textContent = insult.text;
+
+    const btn = document.createElement('button');
+    btn.className = 'result-copy-btn';
+    btn.textContent = 'Copy';
+
+    li.append(num, text, btn);
+    resultsList.appendChild(li);
+  });
+
   output.hidden = false;
-  output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // ── Events ─────────────────────────────────────────────────────────────────
 
-generateBtn.addEventListener('click', showInsult);
-anotherBtn.addEventListener('click', showInsult);
+generateBtn.addEventListener('click', showInsults);
 
-copyBtn.addEventListener('click', () => {
-  navigator.clipboard.writeText(insultText.textContent).then(() => {
-    const original = copyBtn.textContent;
-    copyBtn.textContent = 'Copied';
-    setTimeout(() => { copyBtn.textContent = original; }, 1500);
+resultsList.addEventListener('click', e => {
+  const btn = e.target.closest('.result-copy-btn');
+  if (!btn) return;
+  const text = btn.closest('.result-item').querySelector('.result-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
   });
 });

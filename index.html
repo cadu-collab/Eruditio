@@ -19,16 +19,6 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <span class="hero-label">The Generator</span>
-        <h1>Intelligence,<br>weaponized.</h1>
-        <p class="hero-sub">Select your context. Receive your compliment.</p>
-      </div>
-    </section>
-
-    <hr class="section-divider">
-
     <section class="generator">
       <div class="container">
 
@@ -67,14 +57,7 @@
         <button id="generate-btn" class="generate-btn">Generate &#8594;</button>
 
         <div class="output" id="output" hidden>
-          <div class="output-card">
-            <div class="output-label">Your compliment</div>
-            <p id="insult-text"></p>
-            <div class="output-actions">
-              <button id="copy-btn" class="copy-btn">Copy</button>
-              <button id="another-btn" class="another-btn">Another one</button>
-            </div>
-          </div>
+          <ol class="results-list" id="results-list"></ol>
         </div>
 
       </div>
