@@ -293,10 +293,11 @@ let lastPickedIndices = new Set();
 
 // ── Elements ───────────────────────────────────────────────────────────────
 
-const generateBtn = document.getElementById('generate-btn');
-const output      = document.getElementById('output');
-const resultsList = document.getElementById('results-list');
-const toneBtns    = document.querySelectorAll('.tone-btn');
+const generateBtn      = document.getElementById('generate-btn');
+const output           = document.getElementById('output');
+const resultsList      = document.getElementById('results-list');
+const outputPlaceholder = document.getElementById('output-placeholder');
+const toneBtns         = document.querySelectorAll('.tone-btn');
 
 // ── Tone selection ─────────────────────────────────────────────────────────
 
@@ -369,6 +370,12 @@ function showInsults() {
   });
 
   output.hidden = false;
+  outputPlaceholder.hidden = true;
+
+  // On mobile (single-column layout) scroll results into view
+  if (window.innerWidth <= 900) {
+    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 // ── Events ─────────────────────────────────────────────────────────────────

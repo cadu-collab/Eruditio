@@ -6,60 +6,81 @@
   <title>Eruditio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/style.css" />
 </head>
 <body>
 
   <header class="header">
     <div class="container">
-      <div class="logo">Eruditio</div>
-      <p class="tagline">The art of the eloquent slight.</p>
+      <div class="header-inner">
+        <div class="logo">Eruditio</div>
+        <p class="tagline">The art of the eloquent slight.</p>
+      </div>
     </div>
   </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Intelligence,<br>weaponized.</h1>
+      <p class="hero-sub">Select your context. Receive your compliment.</p>
+    </div>
+  </section>
 
   <main>
     <section class="generator">
       <div class="container">
+        <div class="generator-layout">
 
-        <div class="controls">
-          <div class="control-group">
-            <label for="relationship">Recipient</label>
-            <select id="relationship">
-              <option value="general">Anyone</option>
-              <option value="coworker">Coworker</option>
-              <option value="boss">Boss</option>
-              <option value="friend">Friend</option>
-              <option value="ex">Ex</option>
-            </select>
+          <div class="generator-controls">
+            <div class="controls">
+              <div class="control-group">
+                <label for="relationship">Recipient</label>
+                <select id="relationship">
+                  <option value="general">Anyone</option>
+                  <option value="coworker">Coworker</option>
+                  <option value="boss">Boss</option>
+                  <option value="friend">Friend</option>
+                  <option value="ex">Ex</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="occasion">Occasion</label>
+                <select id="occasion">
+                  <option value="general">Any</option>
+                  <option value="meeting">Meeting</option>
+                  <option value="party">Social event</option>
+                  <option value="text">Text / Message</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label>Tone</label>
+                <div class="tone-options">
+                  <button class="tone-btn active" data-tone="1">Subtle</button>
+                  <button class="tone-btn" data-tone="2">Sharp</button>
+                  <button class="tone-btn" data-tone="3">Savage</button>
+                </div>
+              </div>
+            </div>
+
+            <button id="generate-btn" class="generate-btn">Generate &#8594;</button>
           </div>
 
-          <div class="control-group">
-            <label for="occasion">Occasion</label>
-            <select id="occasion">
-              <option value="general">Any</option>
-              <option value="meeting">Meeting</option>
-              <option value="party">Social event</option>
-              <option value="text">Text / Message</option>
-            </select>
-          </div>
-
-          <div class="control-group">
-            <label>Tone</label>
-            <div class="tone-options">
-              <button class="tone-btn active" data-tone="1">Subtle</button>
-              <button class="tone-btn" data-tone="2">Sharp</button>
-              <button class="tone-btn" data-tone="3">Savage</button>
+          <div class="generator-output">
+            <div class="output-header">
+              <span class="output-section-label">Your Compliments</span>
+            </div>
+            <div class="output" id="output" hidden>
+              <ol class="results-list" id="results-list"></ol>
+            </div>
+            <div class="output-placeholder" id="output-placeholder">
+              <p>Select a recipient, occasion, and tone &mdash; then generate.</p>
             </div>
           </div>
+
         </div>
-
-        <button id="generate-btn" class="generate-btn">Generate &#8594;</button>
-
-        <div class="output" id="output" hidden>
-          <ol class="results-list" id="results-list"></ol>
-        </div>
-
       </div>
     </section>
   </main>
